@@ -71,10 +71,9 @@ def wait_for_extended_operation(
 
 app = FastAPI()
 
-@app.get("/ping")
-def ping():
-    return {"key":"value"}
-
+# @app.get("/ping")
+# def ping():
+#     return {"key":"value"}
 
 @app.get("/get_compute_engine")
 def list_instances(
