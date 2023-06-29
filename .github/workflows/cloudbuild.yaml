@@ -1,0 +1,11 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: build_docker_image
+  args: [ 'build', '-t', 'europe-west3-docker.pkg.dev/cw-academy-sandbox-chen/acmerest/instances-list-set-api:$SHORT_SHA', '.' ]
+- name: 'gcr.io/cloud-builders/docker'
+  id: push_docker_image
+  args: ['push', 'europe-west3-docker.pkg.dev/cw-academy-sandbox-chen/acmerest/instances-list-set-api:$SHORT_SHA']
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud 
+  args: ['run', 'deploy', 'instances-list-set-api', '--image', 'europe-west3-docker.pkg.dev/cw-academy-sandbox-chen/acmerest/instances-list-set-api:$SHORT_SHA', '--region', 'europe-west3']
